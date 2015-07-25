@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:checked="true"
+            android:id="@+id/standard_app_bar_menu_item"
+            android:icon="@mipmap/ic_launcher"
+            android:title="standard_app_bar_menu_title"
+            />
+        <item
+            android:id="@+id/tabs_menu_item"
+            android:icon="@mipmap/ic_launcher"
+            android:title="tabs_menu_title"
+            />
+        <item
+            android:id="@+id/parallax_menu_item"
+            android:icon="@mipmap/ic_launcher"
+            android:title="flexible_space_with_image_menu_title"
+            />
+
+        <item
+            android:id="@+id/pinned_app_bar_menu_item"
+            android:icon="@mipmap/ic_launcher"
+            android:title="flexible_space_menu_title"
+            />
+
+        <item
+            android:id="@+id/floating_action_button"
+            android:icon="@mipmap/ic_launcher"
+            android:title="floating_action_button"
+            />
+    </group>
+</menu>
