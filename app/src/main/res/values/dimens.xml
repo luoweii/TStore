@@ -22,4 +22,7 @@
 
     <!-- Profile Image -->
     <dimen name="profile_dimen">64dp</dimen>
+    <dimen name="profile_img_margin_top">16dp</dimen>
+    <dimen name="profile_img_margin_start">16dp</dimen>
+    <dimen name="profile_img_margin_end">16dp</dimen>
 </resources>
