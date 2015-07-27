@@ -2,7 +2,7 @@ package com.luowei.tstore.module;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.luowei.tstore.R;
@@ -36,11 +36,12 @@ public class MainFragment extends BaseFragment  {
     private void setList() {
         RecyclerView recyclerView = ViewHelper.findById(getActivity(), R.id.simpleList);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(),3);
         recyclerView.setLayoutManager(layoutManager);
-
+        recyclerView.setHasFixedSize(true);
         RVArrayAdapter arrayAdapter = new RVArrayAdapter(getData());
         recyclerView.setAdapter(arrayAdapter);
+//        recyclerView.addItemDecoration(new DividerGridItemDecoration(getActivity()));
     }
 
     @NonNull
