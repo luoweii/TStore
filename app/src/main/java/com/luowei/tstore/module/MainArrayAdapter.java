@@ -10,10 +10,10 @@ import android.widget.TextView;
 import com.luowei.tstore.R;
 import com.luowei.tstore.utils.ViewHelper;
 
-public class RVArrayAdapter extends RecyclerView.Adapter<RVArrayAdapter.ViewHolder> {
+public class MainArrayAdapter extends RecyclerView.Adapter<MainArrayAdapter.ViewHolder> {
 
     private String[] mData;
-    public RVArrayAdapter(String[] data){
+    public MainArrayAdapter(String[] data){
         mData = data;
     }
     @Override

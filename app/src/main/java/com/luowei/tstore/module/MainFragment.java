@@ -39,7 +39,7 @@ public class MainFragment extends BaseFragment  {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(),3);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        RVArrayAdapter arrayAdapter = new RVArrayAdapter(getData());
+        MainArrayAdapter arrayAdapter = new MainArrayAdapter(getData());
         recyclerView.setAdapter(arrayAdapter);
 //        recyclerView.addItemDecoration(new DividerGridItemDecoration(getActivity()));
     }
