@@ -8,9 +8,9 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseStream;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.util.LogUtils;
-import com.tesool.kiread.config.AppConfig;
-import com.tesool.kiread.service.message.RequestMsg;
-import com.tesool.kiread.utils.JSONUtil;
+import com.luowei.tstore.config.AppConfig;
+import com.luowei.tstore.service.message.RequestMsg;
+import com.luowei.tstore.utils.JSONUtil;
 
 import org.apache.http.entity.StringEntity;
 import org.json.JSONException;
