@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.BaseAdapter;
 
 import com.google.gson.reflect.TypeToken;
 import com.luowei.tstore.R;
