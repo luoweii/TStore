@@ -11,18 +11,14 @@ public class AppConfig {
 	/**
 	 * 服务器地址
 	 */
-	public static final String HTTP_SERVER = "http://baseapp.tellkr.net/";
+	public static final String HTTP_SERVER = "http://apis.baidu.com/apistore/";
 	/**
 	 * 服务器端口
 	 */
-	public static final int HTTP_SERVER_PORT = 8003;
-	
+	public static final int HTTP_SERVER_PORT = 80;
+
 	/**
-	 * 友盟分享服务
+	 * api服务key
 	 */
-    public static final String UM_SHARE = "com.umeng.share";
-    /**
-     * 友盟第三方登录服务
-     */
-    public static final String UM_LOGIN = "com.umeng.login";
+	public static final String API_KEY = "54e612502a38ee6ea7e28404dddaf9c6";
 }

@@ -1,0 +1,14 @@
+[
+    {
+        "name":"百度OCR文字识别",
+        "imgId":"",
+        "server":"http://apis.baidu.com/apistore/idlocr/ocr",
+        "intent":"tstore.intent.action.BAIDU_OCR"
+    },
+    {
+        "name":"天气查询",
+        "imgId":"",
+        "server":"http://apis.baidu.com/apistore/weatherservice/recentweathers",
+        "intent":"tstore.intent.action.BAIDU_WEATHER"
+    }
+]

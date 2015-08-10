@@ -8,12 +8,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.luowei.tstore.R;
+import com.luowei.tstore.entity.Function;
 import com.luowei.tstore.utils.ViewHelper;
 
-public class MainArrayAdapter extends RecyclerView.Adapter<MainArrayAdapter.ViewHolder> {
+import java.util.List;
 
-    private String[] mData;
-    public MainArrayAdapter(String[] data){
+public class MainArrayAdapter extends RecyclerView.Adapter<MainArrayAdapter.ViewHolder> {
+    private List<Function> mData;
+    public MainArrayAdapter(List<Function> data){
         mData = data;
     }
     @Override
@@ -26,7 +28,7 @@ public class MainArrayAdapter extends RecyclerView.Adapter<MainArrayAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        viewHolder.tvName.setText(mData[position]);
+        viewHolder.tvName.setText(mData.get(position).getName());
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,7 +39,7 @@ public class MainArrayAdapter extends RecyclerView.Adapter<MainArrayAdapter.View
 
     @Override
     public int getItemCount() {
-        return mData.length;
+        return mData.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

@@ -7,5 +7,6 @@
     <color name="colorAccent">#23ff9a</color>
     <color name="main_divider">#ddd</color>
     <color name="transparent">#0000</color>
+    <color name="background2">#eee</color>
     <color name="background">#fafafa</color>
 </resources>

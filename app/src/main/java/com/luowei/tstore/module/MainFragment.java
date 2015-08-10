@@ -5,14 +5,23 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.google.gson.reflect.TypeToken;
 import com.luowei.tstore.R;
+import com.luowei.tstore.entity.Function;
+import com.luowei.tstore.utils.CommonUtil;
+import com.luowei.tstore.utils.JSONUtil;
 import com.luowei.tstore.utils.ViewHelper;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by luowei on 2015/7/25.
  */
 public class MainFragment extends BaseFragment  {
-    private static final int AMOUNT_OF_DATA = 50;
+    private List<Function> data = new ArrayList<>();
 
     /**
      * Use this factory method to create a new instance of
@@ -27,9 +36,23 @@ public class MainFragment extends BaseFragment  {
     public MainFragment() {
     }
 
+    private void initData() {
+        try {
+            InputStream is = getResources().openRawResource(R.raw.functions);
+            byte [] buffer = new byte[is.available()];
+            while (is.read(buffer) != -1);
+            String json = new String(buffer);
+            data = JSONUtil.getInstance().fromJson(json,new TypeToken<List<Function>>() {
+            }.getType());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initData();
         setList();
     }
 
@@ -45,11 +68,7 @@ public class MainFragment extends BaseFragment  {
     }
 
     @NonNull
-    private String[] getData() {
-        String[] data = new String[AMOUNT_OF_DATA];
-        for(int i=0;i<AMOUNT_OF_DATA;++i){
-            data[i]=(getString(R.string.sample_data,(i+1)));
-        }
+    private List<Function> getData() {
         return data;
     }
 

@@ -2,22 +2,28 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="0.5dp">
-
-    <com.luowei.tstore.component.SquareImageView
-        android:id="@+id/ivImage"
+    <com.luowei.tstore.component.materialripple.MaterialRippleLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"
-        android:scaleType="centerInside"
-        android:background="@drawable/bg_default_button_selector"
-        android:layout_gravity="center" />
+        app:mrl_rippleOverlay="true">
+        <com.luowei.tstore.component.SquareImageView
+            android:id="@+id/ivImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="centerInside"
+            android:background="@drawable/bg_default_button_selector"
+            android:layout_gravity="center" />
+    </com.luowei.tstore.component.materialripple.MaterialRippleLayout>
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="10dp"
         android:maxLines="2" />
 
 </FrameLayout>
