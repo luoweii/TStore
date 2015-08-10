@@ -10,5 +10,11 @@
         "imgId":"",
         "server":"http://apis.baidu.com/apistore/weatherservice/recentweathers",
         "intent":"tstore.intent.action.BAIDU_WEATHER"
+    },
+    {
+        "name":"身份证查询",
+        "imgId":"",
+        "server":"http://apis.baidu.com/apistore/idservice/id",
+        "intent":"tstore.intent.action.BAIDU_IDCARD"
     }
 ]
