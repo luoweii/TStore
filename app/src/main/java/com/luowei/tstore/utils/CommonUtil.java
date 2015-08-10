@@ -9,6 +9,6 @@ import com.luowei.tstore.App;
  */
 public class CommonUtil {
     public static void showToast(CharSequence cs) {
-        Toast.makeText(App.context,cs,Toast.LENGTH_SHORT).show();
+        Toast.makeText(App.context, cs, Toast.LENGTH_SHORT).show();
     }
 }

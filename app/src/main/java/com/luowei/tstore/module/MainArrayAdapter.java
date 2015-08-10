@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.luowei.tstore.R;
 import com.luowei.tstore.entity.Function;
+import com.luowei.tstore.utils.ResUtil;
 import com.luowei.tstore.utils.ViewHelper;
 
 import java.util.List;
@@ -28,7 +29,10 @@ public class MainArrayAdapter extends RecyclerView.Adapter<MainArrayAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        viewHolder.tvName.setText(mData.get(position).getName());
+        Function f = mData.get(position);
+        viewHolder.tvName.setText(f.getName());
+        viewHolder.ivImage.setImageResource(ResUtil.getId(viewHolder.ivImage.getContext(),
+                "drawable",f.getImgId()));
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

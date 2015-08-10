@@ -1,20 +1,26 @@
 [
     {
         "name":"百度OCR文字识别",
-        "imgId":"",
+        "imgId":"icon_ocr",
         "server":"http://apis.baidu.com/apistore/idlocr/ocr",
         "intent":"tstore.intent.action.BAIDU_OCR"
     },
     {
         "name":"天气查询",
-        "imgId":"",
+        "imgId":"icon_weather",
         "server":"http://apis.baidu.com/apistore/weatherservice/recentweathers",
         "intent":"tstore.intent.action.BAIDU_WEATHER"
     },
     {
         "name":"身份证查询",
-        "imgId":"",
+        "imgId":"icon_idcard",
         "server":"http://apis.baidu.com/apistore/idservice/id",
         "intent":"tstore.intent.action.BAIDU_IDCARD"
+    },
+    {
+        "name":"IP地址查询",
+        "imgId":"",
+        "server":"http://apis.baidu.com/apistore/iplookupservice/iplookup",
+        "intent":"tstore.intent.action.BAIDU_IPLOOKUP"
     }
 ]
