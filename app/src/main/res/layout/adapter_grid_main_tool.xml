@@ -13,7 +13,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_launcher"
-            android:scaleType="centerInside"
             android:background="@drawable/bg_default_button_selector"
             android:layout_gravity="center" />
     </com.luowei.tstore.component.materialripple.MaterialRippleLayout>
@@ -24,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="10dp"
+        android:gravity="center"
         android:maxLines="2" />
 
 </FrameLayout>

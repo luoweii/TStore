@@ -19,8 +19,26 @@
     },
     {
         "name":"IP地址查询",
-        "imgId":"",
+        "imgId":"icon_iplookup",
         "server":"http://apis.baidu.com/apistore/iplookupservice/iplookup",
         "intent":"tstore.intent.action.BAIDU_IPLOOKUP"
+    },
+    {
+        "name":"股票查询",
+        "imgId":"icon_hkstock",
+        "server":"http://apis.baidu.com/apistore/stockservice/hkstock",
+        "intent":"tstore.intent.action.BAIDU_HKSTOCK"
+    },
+    {
+        "name":"在线分词服务",
+        "imgId":"icon_pullword",
+        "server":"http://apis.baidu.com/apistore/pullword/words",
+        "intent":"tstore.intent.action.BAIDU_PULLWORD"
+    },
+    {
+        "name":"人脸识别服务",
+        "imgId":"icon_ocr",
+        "server":"http://apis.baidu.com/idl_baidu/faceverifyservice/face_deleteuser",
+        "intent":"tstore.intent.action.BAIDU_FACE_DELETEUSER"
     }
 ]
