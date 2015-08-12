@@ -1,9 +1,11 @@
 package com.luowei.tstore.module;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,14 +31,15 @@ public class MainArrayAdapter extends RecyclerView.Adapter<MainArrayAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        Function f = mData.get(position);
+        final Function f = mData.get(position);
         viewHolder.tvName.setText(f.getName());
         viewHolder.ivImage.setImageResource(ResUtil.getId(viewHolder.ivImage.getContext(),
                 "drawable",f.getImgId()));
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+        viewHolder.flContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent it = new Intent(f.getIntent());
+                v.getContext().startActivity(it);
             }
         });
     }
@@ -49,11 +52,13 @@ public class MainArrayAdapter extends RecyclerView.Adapter<MainArrayAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView tvName;
         public ImageView ivImage;
+        public FrameLayout flContent;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvName = ViewHelper.findById(itemView,R.id.tvName);
             ivImage = ViewHelper.findById(itemView,R.id.ivImage);
+            flContent = ViewHelper.findById(itemView,R.id.flContent);
         }
     }
 }

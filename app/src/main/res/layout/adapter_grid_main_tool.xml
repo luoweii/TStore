@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="0.5dp">
+
     <com.luowei.tstore.component.materialripple.MaterialRippleLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:mrl_rippleOverlay="true">
-        <com.luowei.tstore.component.SquareImageView
-            android:id="@+id/ivImage"
+
+        <FrameLayout
+            android:id="@+id/flContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
-            android:background="@drawable/bg_default_button_selector"
-            android:layout_gravity="center" />
-    </com.luowei.tstore.component.materialripple.MaterialRippleLayout>
+            android:background="@drawable/bg_default_button_selector">
 
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:maxLines="2" />
+            <com.luowei.tstore.component.SquareImageView
+                android:id="@+id/ivImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:maxLines="2" />
+        </FrameLayout>
+    </com.luowei.tstore.component.materialripple.MaterialRippleLayout>
 
 </FrameLayout>
