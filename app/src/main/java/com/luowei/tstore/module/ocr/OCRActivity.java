@@ -8,7 +8,8 @@ import android.view.View;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.luowei.tstore.R;
 import com.luowei.tstore.module.BaseActivity;
-import com.luowei.tstore.utils.CommonUtil;
+
+import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
 
 /**
  * Created by luowei on 2015/8/13.
@@ -21,6 +22,8 @@ public class OCRActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ocr);
+        SwipeBackActivityHelper sbah = new SwipeBackActivityHelper(this);
+        sbah.onActivityCreate();
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
