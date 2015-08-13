@@ -32,7 +32,7 @@ public class App extends Application {
             final Intent intent = getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //            getApplicationContext().startActivity(intent);
-            System.exit(0);
+//            System.exit(0);
         }
     };
 

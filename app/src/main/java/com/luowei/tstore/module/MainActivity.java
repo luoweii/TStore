@@ -1,5 +1,9 @@
 package com.luowei.tstore.module;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
@@ -35,6 +39,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         initNavigator();
         mCurrentMenuItem = R.id.standard_app_bar_menu_item;
         setNewRootFragment(MainFragment.newInstance());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
 
     private void setupToolbar() {
@@ -86,7 +92,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     public void openDrawer() {
-        mDrawerLayout.openDrawer(Gravity.LEFT);
+        mDrawerLayout.openDrawer(Gravity.RIGHT);
     }
 
     @Override
