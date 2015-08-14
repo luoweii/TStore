@@ -9,16 +9,8 @@ import com.lidroid.xutils.http.ResponseStream;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.util.LogUtils;
 import com.luowei.tstore.config.AppConfig;
-import com.luowei.tstore.service.message.RequestMsg;
+import com.luowei.tstore.config.Constant;
 import com.luowei.tstore.utils.JSONUtil;
-
-import org.apache.http.entity.StringEntity;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
-import java.util.Iterator;
-import java.util.Map.Entry;
 
 /**
  * @author 骆巍
@@ -34,36 +26,25 @@ public class HttpConnection {
     /**
      * 异步post请求
      *
-     * @param requestMsg
      * @param httpCallBack
      */
-    public static void post(RequestMsg requestMsg, HttpCallBack<?> httpCallBack) {
-        try {
-            String url = AppConfig.HTTP_SERVER + requestMsg.getApi();
-            LogUtils.d("HttpConnection(post url): " + url);
-            RequestParams params = initRequestParams(requestMsg);
-            httpUtils.send(HttpRequest.HttpMethod.POST, url, params, httpCallBack);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+    public static void post(String api, RequestParams params, HttpCallBack<?> httpCallBack) {
+        LogUtils.d("HttpConnection(post url): " + api);
+        params.addHeader(Constant.API_KEY, AppConfig.API_KEY);
+        httpUtils.send(HttpRequest.HttpMethod.POST, api, params, httpCallBack);
     }
 
     /**
      * 同步post请求
      *
-     * @param requestMsg
      * @param clazz
      * @return
      * @throws Exception
      */
-    public static <T> T postSync(RequestMsg requestMsg, Class<?> clazz) {
+    public static <T> T postSync(String api, RequestParams params, Class<?> clazz) {
+        LogUtils.d("HttpConnection(postSync url): " + api);
         try {
-            String url = AppConfig.HTTP_SERVER + requestMsg.getApi();
-            LogUtils.d("HttpConnection: " + url + "\n" + requestMsg.getParamString());
-            RequestParams params = initRequestParams(requestMsg);
-            ResponseStream responseStream = httpUtils.sendSync(HttpRequest.HttpMethod.POST, url, params);
+            ResponseStream responseStream = httpUtils.sendSync(HttpRequest.HttpMethod.POST, api, params);
             if (responseStream != null) {
                 String result = responseStream.readString();
                 LogUtils.d(result);
@@ -74,19 +55,4 @@ public class HttpConnection {
         }
         return null;
     }
-
-    private static RequestParams initRequestParams(RequestMsg requestMsg) throws JSONException, UnsupportedEncodingException {
-        RequestParams params = new RequestParams();
-        Iterator<Entry<String, String>> iter = requestMsg.getParams().entrySet().iterator();
-        JSONObject json = new JSONObject();
-        while (iter.hasNext()) {
-            Entry<String, String> entry = iter.next();
-            json.put(entry.getKey(), entry.getValue());
-//			params.addBodyParameter(entry.getKey(),entry.getValue());
-        }
-        LogUtils.d("HttpConnection(post payload): " + json.toString());
-        params.setBodyEntity(new StringEntity(json.toString()));
-        return params;
-    }
-
 }

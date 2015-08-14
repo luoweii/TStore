@@ -40,7 +40,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         LogUtils.customTagPrefix = "TSTORE";
-        Thread.setDefaultUncaughtExceptionHandler(uncaughtExceptionHandler);
+//        Thread.setDefaultUncaughtExceptionHandler(uncaughtExceptionHandler);
         context = getApplicationContext();
         if (maps == null) maps = new HashMap<>();
 

@@ -2,10 +2,12 @@ package com.luowei.tstore.entity;
 
 import com.luowei.tstore.config.AppConfig;
 
+import java.io.Serializable;
+
 /**功能模块类
  * Created by luowei on 2015/8/10.
  */
-public class Function {
+public class Function implements Serializable {
     private String name;
     private String imgId;
     private String apikey= AppConfig.API_KEY;//默认是cofig里面的key

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.luowei.tstore.R;
+import com.luowei.tstore.config.Constant;
 import com.luowei.tstore.entity.Function;
 import com.luowei.tstore.utils.ResUtil;
 import com.luowei.tstore.utils.ViewHelper;
@@ -39,6 +40,7 @@ public class MainArrayAdapter extends RecyclerView.Adapter<MainArrayAdapter.View
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(f.getIntent());
+                it.putExtra(Constant.FUNCTION, f);
                 v.getContext().startActivity(it);
             }
         });
