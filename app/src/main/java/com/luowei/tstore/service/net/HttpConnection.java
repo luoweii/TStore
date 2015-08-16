@@ -12,6 +12,8 @@ import com.luowei.tstore.config.AppConfig;
 import com.luowei.tstore.config.Constant;
 import com.luowei.tstore.utils.JSONUtil;
 
+import java.io.InputStream;
+
 /**
  * @author 骆巍
  * @date 2015-2-1
@@ -29,7 +31,17 @@ public class HttpConnection {
      * @param httpCallBack
      */
     public static void post(String api, RequestParams params, HttpCallBack<?> httpCallBack) {
-        LogUtils.d("HttpConnection(post url): " + api);
+        LogUtils.d("-------------HttpConnection(post url)--------------- \n" + api);
+        try {
+            InputStream stream = params.getEntity().getContent();
+            byte[] bytes = new byte[stream.available()];
+            stream.read(bytes);
+            String str = new String(bytes);
+            LogUtils.d("--------------------request params------------------------\n"+str);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         params.addHeader(Constant.API_KEY, AppConfig.API_KEY);
         httpUtils.send(HttpRequest.HttpMethod.POST, api, params, httpCallBack);
     }
@@ -42,12 +54,21 @@ public class HttpConnection {
      * @throws Exception
      */
     public static <T> T postSync(String api, RequestParams params, Class<?> clazz) {
-        LogUtils.d("HttpConnection(postSync url): " + api);
+        LogUtils.d("-------------HttpConnection(postSync url)--------------- \n" + api);
+        try {
+            InputStream stream = params.getEntity().getContent();
+            byte[] bytes = new byte[stream.available()];
+            stream.read(bytes);
+            String str = new String(bytes);
+            LogUtils.d("--------------------request params------------------------\n"+str);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         try {
             ResponseStream responseStream = httpUtils.sendSync(HttpRequest.HttpMethod.POST, api, params);
             if (responseStream != null) {
                 String result = responseStream.readString();
-                LogUtils.d(result);
+                LogUtils.d("--------------------response result------------------------\n"+result);
                 return JSONUtil.getInstance().fromJson(result, clazz);
             }
         } catch (Exception e) {
