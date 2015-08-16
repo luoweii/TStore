@@ -4,9 +4,6 @@ import com.lidroid.xutils.http.RequestParams;
 import com.luowei.tstore.service.net.HttpCallBack;
 import com.luowei.tstore.service.net.HttpConnection;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 /**
  * Created by luowei on 2015/8/14.
  */
@@ -21,6 +18,6 @@ public class OCRService {
             params.addBodyParameter("detecttype", detecttype);
             params.addBodyParameter("imagetype", imagetype);
             params.addBodyParameter("image", image);
-            HttpConnection.post(api, params, httpCallback);
+        HttpConnection.post(api, params, httpCallback);
     }
 }
