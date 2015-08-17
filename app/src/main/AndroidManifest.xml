@@ -27,6 +27,24 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".module.idcard.IdcardActivity">
+            <intent-filter>
+                <action android:name="tstore.intent.action.BAIDU_IDCARD"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".module.iplookup.IplookupActivity">
+            <intent-filter>
+                <action android:name="tstore.intent.action.BAIDU_IPLOOKUP"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".module.stock.StockActivity">
+            <intent-filter>
+                <action android:name="tstore.intent.action.BAIDU_STOCK"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -14,4 +14,5 @@
     <string name="sample_data">"Some data %1$d"</string>
     <string name="camera">拍照</string>
     <string name="album">相册</string>
+    <string name="lookup_idcard">查询身份证</string>
 </resources>

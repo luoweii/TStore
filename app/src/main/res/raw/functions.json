@@ -1,11 +1,5 @@
 [
     {
-        "name":"百度OCR文字识别",
-        "imgId":"icon_ocr",
-        "server":"http://apis.baidu.com/apistore/idlocr/ocr",
-        "intent":"tstore.intent.action.BAIDU_OCR"
-    },
-    {
         "name":"天气查询",
         "imgId":"icon_weather",
         "server":"http://apis.baidu.com/apistore/weatherservice/recentweathers",
@@ -26,8 +20,8 @@
     {
         "name":"股票查询",
         "imgId":"icon_hkstock",
-        "server":"http://apis.baidu.com/apistore/stockservice/hkstock",
-        "intent":"tstore.intent.action.BAIDU_HKSTOCK"
+        "server":"http://apis.baidu.com/apistore/stockservice/stock",
+        "intent":"tstore.intent.action.BAIDU_STOCK"
     },
     {
         "name":"在线分词服务",
@@ -40,5 +34,11 @@
         "imgId":"icon_ocr",
         "server":"http://apis.baidu.com/idl_baidu/faceverifyservice/face_deleteuser",
         "intent":"tstore.intent.action.BAIDU_FACE_DELETEUSER"
+    },
+    {
+        "name":"百度OCR文字识别",
+        "imgId":"icon_ocr",
+        "server":"http://apis.baidu.com/apistore/idlocr/ocr",
+        "intent":"tstore.intent.action.BAIDU_OCR"
     }
 ]

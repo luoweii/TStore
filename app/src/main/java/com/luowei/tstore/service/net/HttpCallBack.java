@@ -6,6 +6,8 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.util.LogUtils;
 import com.luowei.tstore.utils.JSONUtil;
 
+import org.json.JSONObject;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
@@ -18,9 +20,15 @@ public abstract class HttpCallBack<T> extends RequestCallBack<String> {
 
 	@Override
 	public void onSuccess(ResponseInfo<String> responseInfo) {
-		LogUtils.d(responseInfo.result);
-		T data = processResult(responseInfo.result);
-		onSuccess(data);
+		String result = responseInfo.result;
+		LogUtils.d("--------------------response result------------------------\n"+result);
+		try {
+			T data = processResult(result);
+			onSuccess(data);
+		} catch (Exception e) {
+			e.printStackTrace();
+			onFailure(-1,result);
+		}
 	}
 
 	private T processResult(String dataStr) {
