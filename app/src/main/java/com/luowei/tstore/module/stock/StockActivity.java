@@ -1,13 +1,11 @@
 package com.luowei.tstore.module.stock;
 
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -19,6 +17,7 @@ import com.luowei.tstore.R;
 import com.luowei.tstore.config.Constant;
 import com.luowei.tstore.entity.Function;
 import com.luowei.tstore.module.BaseActivity;
+import com.luowei.tstore.module.common.PhotoViewActivity;
 import com.luowei.tstore.service.StockService;
 import com.luowei.tstore.service.message.StockMsg;
 import com.luowei.tstore.service.net.HttpCallBack;
@@ -26,6 +25,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
@@ -51,11 +52,12 @@ public class StockActivity extends BaseActivity {
     private ImageView iv4;
     @ViewInject(R.id.rgStock)
     private RadioGroup rgStock;
+    private ArrayList<String> images = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.stock_activity);
+        setContentView(R.layout.activity_stock);
         function = (Function) getIntent().getSerializableExtra(Constant.FUNCTION);
         SwipeBackActivityHelper sbah = new SwipeBackActivityHelper(this);
         sbah.onActivityCreate();
@@ -94,6 +96,11 @@ public class StockActivity extends BaseActivity {
                     ImageLoader.getInstance().displayImage(klinegraph.dayurl,iv2);
                     ImageLoader.getInstance().displayImage(klinegraph.weekurl,iv3);
                     ImageLoader.getInstance().displayImage(klinegraph.monthurl,iv4);
+
+                    images.add(klinegraph.minurl);
+                    images.add(klinegraph.dayurl);
+                    images.add(klinegraph.weekurl);
+                    images.add(klinegraph.monthurl);
                 }
 
                 @Override
@@ -121,5 +128,9 @@ public class StockActivity extends BaseActivity {
                 tvResult.setText(e.getExceptionCode()+" "+s);
             }
         });
+    }
+
+    public void onImageClick(View view) {
+        PhotoViewActivity.startActivity(this,0,images);
     }
 }
