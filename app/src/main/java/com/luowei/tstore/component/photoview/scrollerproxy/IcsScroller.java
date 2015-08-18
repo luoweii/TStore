@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package uk.co.senab.photoview.scrollerproxy;
+package com.luowei.tstore.component.photoview.scrollerproxy;
 
 import android.annotation.TargetApi;
 import android.content.Context;

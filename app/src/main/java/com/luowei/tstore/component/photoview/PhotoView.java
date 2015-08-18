@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package uk.co.senab.photoview;
+package com.luowei.tstore.component.photoview;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -24,10 +24,6 @@ import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.widget.ImageView;
-
-import uk.co.senab.photoview.PhotoViewAttacher.OnMatrixChangedListener;
-import uk.co.senab.photoview.PhotoViewAttacher.OnPhotoTapListener;
-import uk.co.senab.photoview.PhotoViewAttacher.OnViewTapListener;
 
 public class PhotoView extends ImageView implements IPhotoView {
 
@@ -210,7 +206,7 @@ public class PhotoView extends ImageView implements IPhotoView {
     }
 
     @Override
-    public void setOnMatrixChangeListener(OnMatrixChangedListener listener) {
+    public void setOnMatrixChangeListener(PhotoViewAttacher.OnMatrixChangedListener listener) {
         mAttacher.setOnMatrixChangeListener(listener);
     }
 
@@ -220,22 +216,22 @@ public class PhotoView extends ImageView implements IPhotoView {
     }
 
     @Override
-    public void setOnPhotoTapListener(OnPhotoTapListener listener) {
+    public void setOnPhotoTapListener(PhotoViewAttacher.OnPhotoTapListener listener) {
         mAttacher.setOnPhotoTapListener(listener);
     }
 
     @Override
-    public OnPhotoTapListener getOnPhotoTapListener() {
+    public PhotoViewAttacher.OnPhotoTapListener getOnPhotoTapListener() {
         return mAttacher.getOnPhotoTapListener();
     }
 
     @Override
-    public void setOnViewTapListener(OnViewTapListener listener) {
+    public void setOnViewTapListener(PhotoViewAttacher.OnViewTapListener listener) {
         mAttacher.setOnViewTapListener(listener);
     }
 
     @Override
-    public OnViewTapListener getOnViewTapListener() {
+    public PhotoViewAttacher.OnViewTapListener getOnViewTapListener() {
         return mAttacher.getOnViewTapListener();
     }
 

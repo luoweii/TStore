@@ -1,4 +1,4 @@
-package uk.co.senab.photoview;
+package com.luowei.tstore.component.photoview;
 
 import android.graphics.RectF;
 import android.view.GestureDetector;
