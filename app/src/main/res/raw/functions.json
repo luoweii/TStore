@@ -30,15 +30,39 @@
         "intent":"tstore.intent.action.BAIDU_PULLWORD"
     },
     {
-        "name":"人脸识别服务",
-        "imgId":"icon_ocr",
-        "server":"http://apis.baidu.com/idl_baidu/faceverifyservice/face_deleteuser",
-        "intent":"tstore.intent.action.BAIDU_FACE_DELETEUSER"
+        "name":"手机号码归属地查询",
+        "imgId":"icon_phone_local",
+        "server":"http://apis.baidu.com/apistore/mobilephoneservice/mobilephone",
+        "intent":"tstore.intent.action.BAIDU_PHONE_LOCAL"
     },
     {
         "name":"百度OCR文字识别",
         "imgId":"icon_ocr",
         "server":"http://apis.baidu.com/apistore/idlocr/ocr",
         "intent":"tstore.intent.action.BAIDU_OCR"
+    },
+    {
+        "name":"翻译",
+        "imgId":"icon_dictionary",
+        "server":"http://apis.baidu.com/apistore/tranlateservice/dictionary",
+        "intent":"tstore.intent.action.BAIDU_DICTIONARY"
+    },
+    {
+        "name":"汇率转换",
+        "imgId":"icon_currency",
+        "server":"http://apis.baidu.com/apistore/currencyservice/type",
+        "intent":"tstore.intent.action.BAIDU_CURRENCY"
+    },
+    {
+        "name":"去哪儿景点门票查询",
+        "imgId":"icon_qunaer_ticket",
+        "server":"http://apis.baidu.com/apistore/qunaerticket/querylist",
+        "intent":"tstore.intent.action.BAIDU_QUNAER_TICKET"
+    },
+    {
+        "name":"百度糯米",
+        "imgId":"icon_nuomi",
+        "server":"http://apis.baidu.com/baidunuomi/openapi/shopdeals",
+        "intent":"tstore.intent.action.BAIDU_QUNAER_NUOMI"
     }
 ]
