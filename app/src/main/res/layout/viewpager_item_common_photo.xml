@@ -11,7 +11,7 @@
         android:layout_gravity="center" />
 
     <com.luowei.tstore.component.photoview.PhotoView
-        android:id="@+id/pv_zoom"
+        android:id="@+id/pvZoom"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

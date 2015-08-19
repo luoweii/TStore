@@ -13,7 +13,6 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.luowei.tstore.R;
 import com.luowei.tstore.component.photoview.PhotoView;
@@ -125,8 +124,13 @@ public class PhotoViewActivity extends BaseActivity {
             Date curDate = new Date(System.currentTimeMillis());
             String localTempImgFileName = formatter.format(curDate) + ".jpg";
             File file = new File(AppConfig.DEFUALT_PATH_PHOTO, localTempImgFileName);
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdirs();
+            }
             FileOutputStream fos = new FileOutputStream(file);
-//                arg2.compress(Bitmap.CompressFormat.JPEG, 90, fos);
+            PhotoView pvZoom = (PhotoView) adapter.getCurrentView().findViewById(R.id.pvZoom);
+            Bitmap bitmap = pvZoom.getVisibleRectangleBitmap();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fos);
             fos.flush();
             fos.close();
             CommonUtil.showToast("图片已经保存到: " + file);
@@ -171,7 +175,7 @@ public class PhotoViewActivity extends BaseActivity {
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
             View vRoot = inflater.inflate(R.layout.viewpager_item_common_photo, null);
-            final PhotoView ivImage = (PhotoView) vRoot.findViewById(R.id.pv_zoom);
+            final PhotoView ivImage = (PhotoView) vRoot.findViewById(R.id.pvZoom);
             final ProgressBar progress = (ProgressBar) vRoot.findViewById(R.id.progress_bar);
             ImageLoader.getInstance().displayImage(imageUrls.get(position), ivImage);
             ivImage.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {

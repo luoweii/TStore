@@ -45,6 +45,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".module.pullword.PullwordActivity">
+            <intent-filter>
+                <action android:name="tstore.intent.action.BAIDU_PULLWORD"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!--图片预览-->
         <activity android:name=".module.common.PhotoViewActivity">
         </activity>
     </application>

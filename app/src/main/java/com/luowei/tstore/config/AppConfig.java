@@ -29,6 +29,6 @@ public class AppConfig {
 	/**
 	 * 默认照片保存路径
 	 */
-	public static final String DEFUALT_PATH_PHOTO = Environment.getExternalStorageDirectory() + App.context.getPackageName()+"/photo/";
+	public static final String DEFUALT_PATH_PHOTO = Environment.getExternalStorageDirectory() +"/"+ App.context.getPackageName()+"/photo/";
 
 }
