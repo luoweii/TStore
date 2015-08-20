@@ -57,6 +57,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".module.dictionary.DictionaryActivity">
+            <intent-filter>
+                <action android:name="tstore.intent.action.BAIDU_DICTIONARY"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <!--图片预览-->
         <activity android:name=".module.common.PhotoViewActivity">
         </activity>
