@@ -11,6 +11,28 @@
         android:layout_height="?attr/actionBarSize"
         android:minHeight="?attr/actionBarSize" />
 
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbDictionary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="词典" />
+
+        <RadioButton
+            android:id="@+id/rbTranslate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="翻译" />
+    </RadioGroup>
+
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tilIdcard"
         android:layout_width="match_parent"

@@ -11,7 +11,7 @@ public class DictionaryService {
     public static void dictionary(String api, String word, RequestCallBack<?> httpCallBack) {
         RequestParams params = new RequestParams();
         params.addQueryStringParameter("query", word);
-        if (word.matches("[a-zA-Z]*")) {
+        if (word.matches("[a-z A-Z,\\.?']*")) {
             params.addQueryStringParameter("from", "en");
             params.addQueryStringParameter("to", "zh");
         } else {

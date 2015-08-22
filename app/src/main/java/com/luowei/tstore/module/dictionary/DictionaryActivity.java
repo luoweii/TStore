@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.View;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -14,6 +16,7 @@ import com.luowei.tstore.entity.Function;
 import com.luowei.tstore.module.BaseActivity;
 import com.luowei.tstore.service.DictionaryService;
 import com.luowei.tstore.service.message.DictionaryMsg;
+import com.luowei.tstore.service.message.TranslateMsg;
 import com.luowei.tstore.service.net.HttpCallBack;
 
 import org.json.JSONException;
@@ -34,6 +37,8 @@ public class DictionaryActivity extends BaseActivity {
     private Toolbar toolbar;
     @ViewInject((R.id.tvResult))
     private TextView tvResult;
+    @ViewInject(R.id.radioGroup)
+    private RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,22 +64,56 @@ public class DictionaryActivity extends BaseActivity {
     }
 
     public void onLookupClick(View view) {
-        String word = tilIdcard.getEditText().getText().toString();
-        DictionaryService.dictionary(function.getServer(), word, new HttpCallBack<DictionaryMsg>() {
-            @Override
-            public void onSuccess(DictionaryMsg data) {
-                tvResult.setText(data.toString());
-            }
-
-            @Override
-            public void onFailure(int errCode, String msg) {
-                try {
-                    JSONObject jo = new JSONObject(msg);
-                    tvResult.setText(errCode + " " + jo);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+        final String word = tilIdcard.getEditText().getText().toString();
+        if (radioGroup.getCheckedRadioButtonId() == R.id.rbTranslate) {
+            DictionaryService.dictionary("http://apis.baidu.com/apistore/tranlateservice/translate", word, new HttpCallBack<TranslateMsg>() {
+                @Override
+                public void onSuccess(TranslateMsg data) {
+                    tvResult.setText(word+"\n\n");
+                    for (TranslateMsg.TransResult tr : data.retData.trans_result) {
+                        tvResult.append(tr.dst+"\n");
+                    }
                 }
-            }
-        });
+
+                @Override
+                public void onFailure(int errCode, String msg) {
+                    try {
+                        JSONObject jo = new JSONObject(msg);
+                        tvResult.setText(errCode + " " + jo);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } else {
+            DictionaryService.dictionary(function.getServer(), word, new HttpCallBack<DictionaryMsg>() {
+                @Override
+                public void onSuccess(DictionaryMsg data) {
+                    DictionaryMsg.DictResult dictResult = data.retData.dict_result;
+                    tvResult.setText(Html.fromHtml("<h2>" + dictResult.word_name + "</h2>"));
+                    for (DictionaryMsg.Symbol symbol : dictResult.symbols) {
+                        if (symbol.ph_zh == null) {
+                            tvResult.append("英: " + symbol.ph_en + "    美: " + symbol.ph_am + "\n");
+                        } else {
+                            tvResult.append(symbol.ph_zh + "\n");
+                        }
+                        for (DictionaryMsg.Part part : symbol.parts) {
+                            tvResult.append(part.part + "  " + part.means + "\n");
+                        }
+                        tvResult.append("\n");
+                    }
+                }
+
+                @Override
+                public void onFailure(int errCode, String msg) {
+                    try {
+                        JSONObject jo = new JSONObject(msg);
+                        tvResult.setText(errCode + " " + jo);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
     }
 }

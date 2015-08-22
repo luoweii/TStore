@@ -24,6 +24,7 @@ public class DictionaryMsg extends BaseMsg {
     public class Symbol extends BaseMsg {
         public String ph_am;
         public String ph_en;
+        public String ph_zh;
         public List<Part> parts;
     }
 
