@@ -63,6 +63,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".module.currency.ActivityCurrency">
+            <intent-filter>
+                <action android:name="tstore.intent.action.BAIDU_CURRENCY"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <!--图片预览-->
         <activity android:name=".module.common.PhotoViewActivity">
         </activity>
