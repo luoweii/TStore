@@ -69,8 +69,8 @@ public class ActivityCurrency extends BaseActivity {
         CurrencyService.type(function.getServer(), new HttpCallBack<CurrencyMsg>() {
             @Override
             public void onSuccess(CurrencyMsg data) {
-                sFrom.setAdapter(new ArrayAdapter<>(ActivityCurrency.this, R.layout.support_simple_spinner_dropdown_item,data.retData));
-                sTo.setAdapter(new ArrayAdapter<>(ActivityCurrency.this, R.layout.support_simple_spinner_dropdown_item,data.retData));
+                sFrom.setAdapter(new ArrayAdapter<>(ActivityCurrency.this, R.layout.support_simple_spinner_dropdown_item, data.retData));
+                sTo.setAdapter(new ArrayAdapter<>(ActivityCurrency.this, R.layout.support_simple_spinner_dropdown_item, data.retData));
             }
 
             @Override
@@ -95,7 +95,12 @@ public class ActivityCurrency extends BaseActivity {
         PullwordService.pullword(function.getServer(), word, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-                tvResult.setText(responseInfo.result);
+                try {
+                    JSONObject jo = new JSONObject(responseInfo.result);
+                    tvResult.setText(jo.toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
