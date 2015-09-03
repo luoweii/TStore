@@ -19,7 +19,7 @@ import com.luowei.tstore.entity.Function;
 import com.luowei.tstore.module.BaseActivity;
 import com.luowei.tstore.module.common.PhotoViewActivity;
 import com.luowei.tstore.service.StockService;
-import com.luowei.tstore.service.message.StockMsg;
+import com.luowei.tstore.entity.StockMsg;
 import com.luowei.tstore.service.net.HttpCallBack;
 import com.nostra13.universalimageloader.core.ImageLoader;
 

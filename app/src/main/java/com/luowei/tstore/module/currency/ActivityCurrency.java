@@ -19,7 +19,7 @@ import com.luowei.tstore.entity.Function;
 import com.luowei.tstore.module.BaseActivity;
 import com.luowei.tstore.service.CurrencyService;
 import com.luowei.tstore.service.PullwordService;
-import com.luowei.tstore.service.message.CurrencyMsg;
+import com.luowei.tstore.entity.CurrencyMsg;
 import com.luowei.tstore.service.net.HttpCallBack;
 
 import org.json.JSONException;

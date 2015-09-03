@@ -1,6 +1,4 @@
-package com.luowei.tstore.service.message;
-
-import java.util.List;
+package com.luowei.tstore.entity;
 
 /**
  * Created by luowei on 2015/8/12.

@@ -5,7 +5,6 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -14,7 +13,7 @@ import com.luowei.tstore.config.Constant;
 import com.luowei.tstore.entity.Function;
 import com.luowei.tstore.module.BaseActivity;
 import com.luowei.tstore.service.IplookupService;
-import com.luowei.tstore.service.message.IplookupMsg;
+import com.luowei.tstore.entity.IplookupMsg;
 import com.luowei.tstore.service.net.HttpCallBack;
 
 import org.json.JSONException;

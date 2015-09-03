@@ -1,4 +1,4 @@
-package com.luowei.tstore.service.message;
+package com.luowei.tstore.entity;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;

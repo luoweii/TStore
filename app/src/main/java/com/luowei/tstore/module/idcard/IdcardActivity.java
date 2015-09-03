@@ -1,7 +1,6 @@
 package com.luowei.tstore.module.idcard;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -14,10 +13,8 @@ import com.luowei.tstore.config.Constant;
 import com.luowei.tstore.entity.Function;
 import com.luowei.tstore.module.BaseActivity;
 import com.luowei.tstore.service.IdcardService;
-import com.luowei.tstore.service.message.IdcardMsg;
+import com.luowei.tstore.entity.IdcardMsg;
 import com.luowei.tstore.service.net.HttpCallBack;
-import com.luowei.tstore.utils.CommonUtil;
-import com.luowei.tstore.utils.JSONUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;

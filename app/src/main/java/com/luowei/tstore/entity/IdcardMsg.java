@@ -1,4 +1,4 @@
-package com.luowei.tstore.service.message;
+package com.luowei.tstore.entity;
 
 /**
  * Created by luowei on 2015/8/12.

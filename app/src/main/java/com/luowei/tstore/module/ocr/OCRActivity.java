@@ -1,6 +1,5 @@
 package com.luowei.tstore.module.ocr;
 
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -12,7 +11,6 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.luowei.tstore.R;
@@ -20,7 +18,7 @@ import com.luowei.tstore.config.Constant;
 import com.luowei.tstore.entity.Function;
 import com.luowei.tstore.module.BaseActivity;
 import com.luowei.tstore.service.OCRService;
-import com.luowei.tstore.service.message.OCRWordMsg;
+import com.luowei.tstore.entity.OCRWordMsg;
 import com.luowei.tstore.service.net.HttpCallBack;
 import com.luowei.tstore.utils.CommonUtil;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -30,10 +28,7 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URLEncoder;
 
 import me.imid.swipebacklayout.lib.SwipeBackLayout;

@@ -15,8 +15,8 @@ import com.luowei.tstore.config.Constant;
 import com.luowei.tstore.entity.Function;
 import com.luowei.tstore.module.BaseActivity;
 import com.luowei.tstore.service.DictionaryService;
-import com.luowei.tstore.service.message.DictionaryMsg;
-import com.luowei.tstore.service.message.TranslateMsg;
+import com.luowei.tstore.entity.DictionaryMsg;
+import com.luowei.tstore.entity.TranslateMsg;
 import com.luowei.tstore.service.net.HttpCallBack;
 
 import org.json.JSONException;
