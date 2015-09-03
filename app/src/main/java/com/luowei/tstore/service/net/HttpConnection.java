@@ -73,7 +73,7 @@ public class HttpConnection {
             if (responseStream != null) {
                 String result = responseStream.readString();
                 LogUtils.d("--------------------response result------------------------\n" + result);
-                return JSONUtil.getInstance().fromJson(result, clazz);
+                return JSONUtil.fromJson(result, clazz);
             }
         } catch (Exception e) {
             e.printStackTrace();

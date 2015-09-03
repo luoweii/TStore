@@ -8,10 +8,10 @@ import java.lang.reflect.Type;
 /**
  */
 public class JSONUtil {
-	private Gson gson = null;
+	public static Gson gson = null;
 	private static JSONUtil instance = null;
 
-	private JSONUtil() {
+	static {
 		gson = new GsonBuilder().setDateFormat("yyyyMMddHHmmss").create();
 	}
 
@@ -23,11 +23,11 @@ public class JSONUtil {
 		return instance;
 	}
 
-	public String objectToJson(Object obj) {
+	public static String objectToJson(Object obj) {
 		return gson.toJson(obj);
 	}
 
-	public <T> T fromJson(String str, Type type) {
+	public static <T> T fromJson(String str, Type type) {
 		return gson.fromJson(str, type);
 	}
 }

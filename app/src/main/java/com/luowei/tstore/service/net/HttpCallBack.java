@@ -6,13 +6,10 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.util.LogUtils;
 import com.luowei.tstore.utils.JSONUtil;
 
-import org.json.JSONObject;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 public abstract class HttpCallBack<T> extends RequestCallBack<String> {
-	private JSONUtil gsonUtil = JSONUtil.getInstance();
 
 	@Override
 	public void onStart() {
@@ -33,7 +30,7 @@ public abstract class HttpCallBack<T> extends RequestCallBack<String> {
 
 	private T processResult(String dataStr) {
 		Type type = ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-		return gsonUtil.fromJson(dataStr, type);
+		return JSONUtil.fromJson(dataStr, type);
 	}
 
 	@Override

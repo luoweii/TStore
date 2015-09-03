@@ -4,16 +4,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.BaseAdapter;
 
 import com.google.gson.reflect.TypeToken;
 import com.luowei.tstore.R;
 import com.luowei.tstore.entity.Function;
-import com.luowei.tstore.utils.CommonUtil;
 import com.luowei.tstore.utils.JSONUtil;
 import com.luowei.tstore.utils.ViewHelper;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +40,7 @@ public class MainFragment extends BaseFragment  {
             byte [] buffer = new byte[is.available()];
             while (is.read(buffer) != -1);
             String json = new String(buffer);
-            data = JSONUtil.getInstance().fromJson(json,new TypeToken<List<Function>>() {
+            data = JSONUtil.fromJson(json,new TypeToken<List<Function>>() {
             }.getType());
         } catch (Exception e) {
             e.printStackTrace();
