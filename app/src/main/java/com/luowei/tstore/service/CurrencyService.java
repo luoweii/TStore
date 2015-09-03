@@ -15,6 +15,9 @@ public class CurrencyService {
 
     public static void currency(String api,String fromCurrency,String toCurrency,String amount, RequestCallBack<?> httpCallBack) {
         RequestParams params = new RequestParams();
+        params.addQueryStringParameter("fromCurrency",fromCurrency);
+        params.addQueryStringParameter("toCurrency",toCurrency);
+        params.addQueryStringParameter("amount",amount);
         HttpConnection.get(api,params,httpCallBack);
     }
 }

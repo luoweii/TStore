@@ -9,17 +9,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.luowei.tstore.R;
 import com.luowei.tstore.config.Constant;
+import com.luowei.tstore.entity.CurrencyMsg;
+import com.luowei.tstore.entity.CurrencyTypeMsg;
 import com.luowei.tstore.entity.Function;
 import com.luowei.tstore.module.BaseActivity;
 import com.luowei.tstore.service.CurrencyService;
-import com.luowei.tstore.service.PullwordService;
-import com.luowei.tstore.entity.CurrencyMsg;
 import com.luowei.tstore.service.net.HttpCallBack;
 
 import org.json.JSONException;
@@ -66,11 +63,19 @@ public class ActivityCurrency extends BaseActivity {
     }
 
     private void init() {
-        CurrencyService.type(function.getServer(), new HttpCallBack<CurrencyMsg>() {
+        CurrencyService.type(function.getServer(), new HttpCallBack<CurrencyTypeMsg>() {
             @Override
-            public void onSuccess(CurrencyMsg data) {
+            public void onSuccess(CurrencyTypeMsg data) {
                 sFrom.setAdapter(new ArrayAdapter<>(ActivityCurrency.this, R.layout.support_simple_spinner_dropdown_item, data.retData));
                 sTo.setAdapter(new ArrayAdapter<>(ActivityCurrency.this, R.layout.support_simple_spinner_dropdown_item, data.retData));
+                for (int i = 0; i < data.retData.size(); i++) {
+                    String str = data.retData.get(i);
+                    if (str.equals("USD")) {
+                        sFrom.setSelection(i);
+                    } else if (str.equals("CNY")) {
+                        sTo.setSelection(i);
+                    }
+                }
             }
 
             @Override
@@ -91,22 +96,21 @@ public class ActivityCurrency extends BaseActivity {
     }
 
     public void onLookupClick(View view) {
-        String word = tilText.getEditText().getText().toString();
-        PullwordService.pullword(function.getServer(), word, new RequestCallBack<String>() {
-            @Override
-            public void onSuccess(ResponseInfo<String> responseInfo) {
-                try {
-                    JSONObject jo = new JSONObject(responseInfo.result);
-                    tvResult.setText(jo.toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
+        String text = tilText.getEditText().getText().toString();
+        String from = (String) sFrom.getSelectedItem();
+        String to = (String) sTo.getSelectedItem();
 
-            @Override
-            public void onFailure(HttpException e, String s) {
-                tvResult.setText(e.getExceptionCode() + " " + s);
-            }
-        });
+        CurrencyService.currency("http://apis.baidu.com/apistore/currencyservice/currency",
+                from, to, text, new HttpCallBack<CurrencyMsg>() {
+                    @Override
+                    public void onSuccess(CurrencyMsg data) {
+                        tvResult.setText(data.toString());
+                    }
+
+                    @Override
+                    public void onFailure(int errCode, String msg) {
+                        tvResult.setText(errCode + " " + msg);
+                    }
+                });
     }
 }

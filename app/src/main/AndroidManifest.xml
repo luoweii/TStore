@@ -69,6 +69,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".module.qunaer.QunaerLIstActivity">
+            <intent-filter>
+                <action android:name="tstore.intent.action.BAIDU_QUNAER_TICKET"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <!--图片预览-->
         <activity android:name=".module.common.PhotoViewActivity">
         </activity>

@@ -23,7 +23,7 @@ public class MainArrayAdapter extends RecyclerView.Adapter<MainArrayAdapter.View
         mData = data;
     }
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater
                 .from(viewGroup.getContext())
                 .inflate(R.layout.adapter_grid_main_tool,viewGroup,false);

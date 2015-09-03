@@ -37,7 +37,7 @@ public class IplookupActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.iplookup_activity);
+        setContentView(R.layout.activity_iplookup);
         function = (Function) getIntent().getSerializableExtra(Constant.FUNCTION);
         SwipeBackActivityHelper sbah = new SwipeBackActivityHelper(this);
         sbah.onActivityCreate();
