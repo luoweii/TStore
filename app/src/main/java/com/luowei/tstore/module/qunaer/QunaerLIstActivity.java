@@ -1,6 +1,7 @@
 package com.luowei.tstore.module.qunaer;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.luowei.tstore.R;
+import com.luowei.tstore.component.MetaballView;
 import com.luowei.tstore.config.Constant;
 import com.luowei.tstore.entity.Function;
 import com.luowei.tstore.entity.QunaerListMsg;
@@ -30,6 +32,8 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
  * Created by luowei on 2015/8/19.
  */
 public class QunaerLIstActivity extends BaseActivity {
+    @ViewInject(R.id.swipeRefreshLayout)
+    private SwipeRefreshLayout swipeRefreshLayout;
     private Function function;
     @ViewInject(R.id.toolbar)
     private Toolbar toolbar;
@@ -60,6 +64,14 @@ public class QunaerLIstActivity extends BaseActivity {
         recyclerView.setHasFixedSize(true);
         adapter = new RecyclerViewAdapter();
         recyclerView.setAdapter(adapter);
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         getData();
     }
@@ -85,47 +97,79 @@ public class QunaerLIstActivity extends BaseActivity {
     }
 
 
-    public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+    public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+        private static final int TYPE_ITEM = 0;
+        private static final int TYPE_FOOTER = 1;
 
-        public class ViewHolder extends RecyclerView.ViewHolder {
+        public class ItemViewHolder extends RecyclerView.ViewHolder {
             public TextView tvName;
             public TextView tvId;
             public TextView tvAlias;
 
-            public ViewHolder(View view) {
+            public ItemViewHolder(View view) {
                 super(view);
                 tvName = (TextView) view.findViewById(R.id.tvName);
                 tvId = (TextView) view.findViewById(R.id.tvId);
                 tvAlias = (TextView) view.findViewById(R.id.tvAlias);
             }
+        }
 
+        public class FooterViewHolder extends RecyclerView.ViewHolder {
+            public MetaballView metaballView;
+
+            public FooterViewHolder(View itemView) {
+                super(itemView);
+                metaballView = (MetaballView) itemView.findViewById(R.id.metaballView);
+            }
         }
 
         @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_list_qunaer_list, parent, false);
-            return new ViewHolder(view);
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            if (viewType == TYPE_ITEM) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.item_list_qunaer_list, parent, false);
+                return new ItemViewHolder(view);
+            } else {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.item_list_qunaer_footer, parent, false);
+                return new FooterViewHolder(view);
+            }
         }
 
         @Override
-        public void onBindViewHolder(final ViewHolder holder, int position) {
-            QunaerListMsg.Ticket ticket = data.get(position);
-            holder.tvName.setText(ticket.spotName);
-            holder.tvId.setText(ticket.productId);
-            if (ticket.spotAliasName != null)
-                holder.tvAlias.setText(ticket.spotAliasName.toString());
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            if (holder instanceof ItemViewHolder) {
+                ItemViewHolder holder1 = (ItemViewHolder) holder;
+                QunaerListMsg.Ticket ticket = data.get(position);
+                holder1.tvName.setText(ticket.spotName);
+                holder1.tvId.setText(ticket.productId);
+                if (ticket.spotAliasName != null)
+                    holder1.tvAlias.setText(ticket.spotAliasName.toString());
+                else
+                    holder1.tvAlias.setText("");
+                holder1.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                }
-            });
+                    }
+                });
+            } else if (holder instanceof FooterViewHolder) {
+                FooterViewHolder holder1 = (FooterViewHolder) holder;
+            }
         }
 
         @Override
         public int getItemCount() {
-            return data.size();
+            return data.size() == 0 ? 0 : data.size() + 1;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            if (position + 1 == getItemCount()) {
+                return TYPE_FOOTER;
+            } else {
+                return TYPE_ITEM;
+            }
         }
     }
 }
