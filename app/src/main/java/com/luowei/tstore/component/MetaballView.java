@@ -11,6 +11,8 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
+import com.luowei.tstore.utils.CommonUtil;
+
 import java.util.ArrayList;
 
 /**
@@ -22,7 +24,7 @@ public class MetaballView extends View {
     private float handle_len_rate = 2f;
     private float radius = 30;
     private final int ITEM_COUNT = 6;
-    private final int ITEM_DIVIDER = 60;
+    private int ITEM_DIVIDER = 60;
     private final float SCALE_RATE = 0.3f;
     private float maxLength;
     private ArrayList<Circle> circlePaths = new ArrayList<>();
@@ -57,6 +59,9 @@ public class MetaballView extends View {
     }
 
     private void init() {
+        radius = CommonUtil.dpToPx(getResources(), 10);
+        ITEM_DIVIDER = (int) CommonUtil.dpToPx(getResources(), 20);
+
         paint.setColor(0xffE74C3C);
         paint.setStyle(Paint.Style.FILL);
         paint.setAntiAlias(true);
