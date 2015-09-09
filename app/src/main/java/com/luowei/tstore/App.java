@@ -2,7 +2,6 @@ package com.luowei.tstore;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 
 import com.lidroid.xutils.util.LogUtils;
@@ -29,10 +28,10 @@ public class App extends Application {
         @Override
         public void uncaughtException(Thread thread, Throwable ex) {
             LogUtils.e("uncaughtException, thread:" + thread.toString(), ex);
-            final Intent intent = getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            final Intent intent = getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //            getApplicationContext().startActivity(intent);
-//            System.exit(0);
+            System.exit(0);
         }
     };
 
@@ -40,7 +39,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         LogUtils.customTagPrefix = "TSTORE";
-//        Thread.setDefaultUncaughtExceptionHandler(uncaughtExceptionHandler);
+        Thread.setDefaultUncaughtExceptionHandler(uncaughtExceptionHandler);
         context = getApplicationContext();
         if (maps == null) maps = new HashMap<>();
 

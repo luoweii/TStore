@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -41,6 +42,8 @@ public class QunaerLIstActivity extends BaseActivity {
     private RecyclerView recyclerView;
     private List<QunaerListMsg.Ticket> data = new ArrayList<>();
     private RecyclerViewAdapter adapter;
+    private int pageNo;
+    private boolean isLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,24 +71,49 @@ public class QunaerLIstActivity extends BaseActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                pageNo = 0;
                 getData();
-                swipeRefreshLayout.setRefreshing(false);
             }
         });
-
-        getData();
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(true);
+                getData();
+            }
+        });
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    int lastVisibleItem = ((LinearLayoutManager)recyclerView.getLayoutManager()).findLastVisibleItemPosition();
+                    if (lastVisibleItem + 1 == adapter.getItemCount() && !isLoading) {
+                        getData();
+                    }
+                }
+            }
+        });
     }
 
     private void getData() {
-        QunaerService.getTicketList(function.getServer(), 1, new HttpCallBack<QunaerListMsg>() {
+        isLoading = true;
+        QunaerService.getTicketList(function.getServer(), ++pageNo, new HttpCallBack<QunaerListMsg>() {
             @Override
             public void onSuccess(QunaerListMsg data) {
-                QunaerLIstActivity.this.data = data.retData.ticketList;
+                isLoading = false;
+                swipeRefreshLayout.setRefreshing(false);
+                if (pageNo == 1) {
+                    QunaerLIstActivity.this.data.clear();
+                }
+                pageNo = data.retData.pageNo;
+                QunaerLIstActivity.this.data.addAll(data.retData.ticketList);
                 adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(int errCode, String msg) {
+                isLoading = false;
+                swipeRefreshLayout.setRefreshing(false);
                 CommonUtil.showToast(errCode + " " + msg);
             }
         });
@@ -105,12 +133,14 @@ public class QunaerLIstActivity extends BaseActivity {
             public TextView tvName;
             public TextView tvId;
             public TextView tvAlias;
+            public LinearLayout llContent;
 
             public ItemViewHolder(View view) {
                 super(view);
                 tvName = (TextView) view.findViewById(R.id.tvName);
                 tvId = (TextView) view.findViewById(R.id.tvId);
                 tvAlias = (TextView) view.findViewById(R.id.tvAlias);
+                llContent = (LinearLayout) view.findViewById(R.id.llContent);
             }
         }
 
@@ -147,10 +177,9 @@ public class QunaerLIstActivity extends BaseActivity {
                     holder1.tvAlias.setText(ticket.spotAliasName.toString());
                 else
                     holder1.tvAlias.setText("");
-                holder1.itemView.setOnClickListener(new View.OnClickListener() {
+                holder1.llContent.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                     }
                 });
             } else if (holder instanceof FooterViewHolder) {

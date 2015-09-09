@@ -59,8 +59,8 @@ public class MetaballView extends View {
     }
 
     private void init() {
-        radius = CommonUtil.dpToPx(getResources(), 10);
-        ITEM_DIVIDER = (int) CommonUtil.dpToPx(getResources(), 20);
+        radius = CommonUtil.dpToPx(getResources(), 7);
+        ITEM_DIVIDER = (int) CommonUtil.dpToPx(getResources(), 14);
 
         paint.setColor(0xffE74C3C);
         paint.setStyle(Paint.Style.FILL);
