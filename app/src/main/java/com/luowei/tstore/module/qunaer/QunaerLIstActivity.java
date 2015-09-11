@@ -170,7 +170,7 @@ public class QunaerLIstActivity extends BaseActivity {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             if (holder instanceof ItemViewHolder) {
                 ItemViewHolder holder1 = (ItemViewHolder) holder;
-                QunaerListMsg.Ticket ticket = data.get(position);
+                final QunaerListMsg.Ticket ticket = data.get(position);
                 holder1.tvName.setText(ticket.spotName);
                 holder1.tvId.setText(ticket.productId);
                 if (ticket.spotAliasName != null)
@@ -180,6 +180,7 @@ public class QunaerLIstActivity extends BaseActivity {
                 holder1.llContent.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        QunaerDetailActivity.staticActivity(v.getContext(), ticket.productId);
                     }
                 });
             } else if (holder instanceof FooterViewHolder) {

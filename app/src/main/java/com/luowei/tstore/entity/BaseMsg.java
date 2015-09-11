@@ -7,18 +7,18 @@ public class BaseMsg implements Serializable {
 
     @Override
     public String toString() {
-        String str = "";
+        StringBuilder sb = new StringBuilder("---------------------------\n");
         try {
             Field[] fields = getClass().getDeclaredFields();
             for (Field field : fields) {
                 String name = field.getName();
                 if (!name.startsWith("this")) {
-                    str += field.getName() + "  :  " + field.get(this) + "\n";
+                    sb.append(field.getName() + "  :  " + field.get(this) + "\n");
                 }
             }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        return str;
+        return sb.toString();
     }
 }
