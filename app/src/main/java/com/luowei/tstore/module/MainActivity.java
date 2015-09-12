@@ -1,7 +1,5 @@
 package com.luowei.tstore.module;
 
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,14 +31,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
         setContentView(R.layout.activity_main);
         setupToolbar();
         setupNavDrawer();
         initNavigator();
         mCurrentMenuItem = R.id.standard_app_bar_menu_item;
         setNewRootFragment(MainFragment.newInstance());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
 
     private void setupToolbar() {

@@ -2,25 +2,23 @@ package com.luowei.tstore.module.qunaer;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.luowei.tstore.R;
+import com.luowei.tstore.entity.QunaerDetailMsg;
 import com.luowei.tstore.module.BaseActivity;
 import com.luowei.tstore.service.QunaerService;
+import com.luowei.tstore.service.net.HttpCallBack;
 import com.luowei.tstore.utils.CommonUtil;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
@@ -36,10 +34,16 @@ public class QunaerDetailActivity extends BaseActivity {
     private Toolbar toolbar;
     private boolean isLoading;
     private String id;
+    @ViewInject(R.id.ivBackdrop)
+    private ImageView ivBackdrop;
+    @ViewInject(R.id.collapsing_toolbar)
+    private CollapsingToolbarLayout collapsingToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
         setContentView(R.layout.activity_qunaer_detail);
         id = getIntent().getStringExtra("id");
         SwipeBackActivityHelper sbah = new SwipeBackActivityHelper(this);
@@ -53,40 +57,37 @@ public class QunaerDetailActivity extends BaseActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
         }
+        collapsingToolbar.setTitle(getActivityName());
+        getData();
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getData();
-            }
-        });
-        swipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(true);
-                getData();
-            }
-        });
+//        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
+//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                getData();
+//            }
+//        });
+//        swipeRefreshLayout.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                swipeRefreshLayout.setRefreshing(true);
+//                getData();
+//            }
+//        });
     }
 
     private void getData() {
         isLoading = true;
-        QunaerService.getTicketDetail(id, new RequestCallBack<String>() {
+        QunaerService.getTicketDetail(id, new HttpCallBack<QunaerDetailMsg>() {
             @Override
-            public void onSuccess(ResponseInfo<String> responseInfo) {
-                try {
-                    JSONObject jo = new JSONObject(responseInfo.result);
-                    LogUtils.d(jo.toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            public void onSuccess(QunaerDetailMsg data) {
+                ImageLoader.getInstance().displayImage(data.retData.ticketDetail.data.display.ticket.imageUrl,ivBackdrop);
+                collapsingToolbar.setTitle(data.retData.ticketDetail.data.display.ticket.spotName);
             }
 
             @Override
-            public void onFailure(HttpException e, String s) {
-                CommonUtil.showToast(s);
+            public void onFailure(int errCode, String msg) {
+                CommonUtil.showToast(errCode+" "+msg);
             }
         });
     }

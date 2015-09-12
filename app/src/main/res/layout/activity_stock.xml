@@ -19,32 +19,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <RadioGroup
                 android:id="@+id/rgStock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_margin="@dimen/activity_horizontal_margin"
+                android:gravity="center"
                 android:orientation="horizontal">
+
                 <RadioButton
                     android:id="@+id/rbStock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="股票查询"
-                    />
+                    android:text="股票查询" />
+
                 <RadioButton
                     android:id="@+id/rbHK"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="港股查询"
-                    />
+                    android:text="港股查询" />
+
                 <RadioButton
                     android:id="@+id/rbUS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="美股查询"
-                    />
+                    android:text="美股查询" />
             </RadioGroup>
 
             <android.support.design.widget.TextInputLayout
@@ -56,8 +57,8 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="sz002230"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:text="sz002230" />
             </android.support.design.widget.TextInputLayout>
 
             <Button
@@ -76,27 +77,27 @@
 
             <ImageView
                 android:id="@+id/iv1"
-                android:onClick="onImageClick"
                 android:layout_width="match_parent"
-                android:layout_height="230dp" />
+                android:layout_height="230dp"
+                android:onClick="onImageClick" />
 
             <ImageView
                 android:id="@+id/iv2"
                 android:layout_width="match_parent"
-                android:onClick="onImageClick"
-                android:layout_height="230dp" />
+                android:layout_height="230dp"
+                android:onClick="onImageClick" />
 
             <ImageView
                 android:id="@+id/iv3"
                 android:layout_width="match_parent"
-                android:onClick="onImageClick"
-                android:layout_height="230dp" />
+                android:layout_height="230dp"
+                android:onClick="onImageClick" />
 
             <ImageView
                 android:id="@+id/iv4"
                 android:layout_width="match_parent"
-                android:onClick="onImageClick"
-                android:layout_height="230dp" />
+                android:layout_height="230dp"
+                android:onClick="onImageClick" />
 
         </LinearLayout>
     </ScrollView>
