@@ -9,16 +9,32 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.luowei.tstore.R;
 import com.luowei.tstore.entity.QunaerDetailMsg;
 import com.luowei.tstore.module.BaseActivity;
+import com.luowei.tstore.module.common.PhotoViewActivity;
+import com.luowei.tstore.module.common.WebActivity;
 import com.luowei.tstore.service.QunaerService;
-import com.luowei.tstore.service.net.HttpCallBack;
 import com.luowei.tstore.utils.CommonUtil;
+import com.luowei.tstore.utils.JSONUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
@@ -38,6 +54,16 @@ public class QunaerDetailActivity extends BaseActivity {
     private ImageView ivBackdrop;
     @ViewInject(R.id.collapsing_toolbar)
     private CollapsingToolbarLayout collapsingToolbar;
+    @ViewInject(R.id.tvAlias)
+    private TextView tvAlias;
+    @ViewInject(R.id.tvDesc)
+    private TextView tvDesc;
+    @ViewInject(R.id.tvAddress)
+    private TextView tvAddress;
+    @ViewInject(R.id.tvDetail)
+    private TextView tvDetail;
+    @ViewInject(R.id.tvPrice)
+    private TextView tvPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,16 +104,65 @@ public class QunaerDetailActivity extends BaseActivity {
 
     private void getData() {
         isLoading = true;
-        QunaerService.getTicketDetail(id, new HttpCallBack<QunaerDetailMsg>() {
+        QunaerService.getTicketDetail(id, new RequestCallBack<String>() {
             @Override
-            public void onSuccess(QunaerDetailMsg data) {
-                ImageLoader.getInstance().displayImage(data.retData.ticketDetail.data.display.ticket.imageUrl,ivBackdrop);
-                collapsingToolbar.setTitle(data.retData.ticketDetail.data.display.ticket.spotName);
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                try {
+                    LogUtils.d("---------------------------post response---------------------------\n" + responseInfo.result);
+                    JSONObject jo = new JSONObject(responseInfo.result);
+                    JSONObject jo1 = jo.getJSONObject("retData").getJSONObject("ticketDetail").getJSONObject("data")
+                            .getJSONObject("display").getJSONObject("ticket");
+                    Object priceList = jo1.get("priceList");
+                    if (priceList.toString().startsWith("{")) {
+                        JSONArray ja = new JSONArray();
+                        ja.put(priceList);
+                        jo1.put("priceList", ja);
+                    }
+                    QunaerDetailMsg data = JSONUtil.fromJson(jo.toString(), QunaerDetailMsg.class);
+                    final QunaerDetailMsg.Ticket ticket = data.retData.ticketDetail.data.display.ticket;
+                    ImageLoader.getInstance().displayImage(ticket.imageUrl, ivBackdrop);
+                    collapsingToolbar.setTitle(ticket.spotName);
+                    if (TextUtils.isEmpty(ticket.alias)) {
+                        tvAlias.setVisibility(View.GONE);
+                    } else {
+                        tvAlias.setText(Html.fromHtml("<font color='#aaaaaa'>别名:</font>"));
+                        tvAlias.append("   " + ticket.alias);
+                    }
+                    tvAddress.setText(Html.fromHtml("<font color='#aaaaaa'>地点:</font>"));
+                    tvAddress.append("   " + ticket.address);
+                    if (TextUtils.isEmpty(ticket.description)) {
+                        tvDesc.setVisibility(View.GONE);
+                    } else {
+                        tvDesc.setText("    " + ticket.description);
+                    }
+                    String sPrice = "";
+                    for (QunaerDetailMsg.PriceList p : ticket.priceList) {
+                        sPrice += p.ticketTitle+"        "+p.price+"￥\n";
+                    }
+                    tvPrice.setText(sPrice);
+                    tvDetail.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            WebActivity.startActivity(v.getContext(), ticket.detailUrl);
+                        }
+                    });
+                    ivBackdrop.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            ArrayList<String> list = new ArrayList<>();
+                            list.add(ticket.imageUrl);
+                            PhotoViewActivity.startActivity(QunaerDetailActivity.this, 0, list);
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
-            public void onFailure(int errCode, String msg) {
-                CommonUtil.showToast(errCode+" "+msg);
+            public void onFailure(HttpException e, String s) {
+                e.printStackTrace();
+                CommonUtil.showToast(s);
             }
         });
     }
@@ -97,9 +172,9 @@ public class QunaerDetailActivity extends BaseActivity {
         return "景点详情";
     }
 
-    public static void staticActivity(Context context,String id) {
-        Intent it = new Intent(context,QunaerDetailActivity.class);
-        it.putExtra("id",id);
+    public static void staticActivity(Context context, String id) {
+        Intent it = new Intent(context, QunaerDetailActivity.class);
+        it.putExtra("id", id);
         context.startActivity(it);
     }
 }

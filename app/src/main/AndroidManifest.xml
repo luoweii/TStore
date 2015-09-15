@@ -80,6 +80,8 @@
         </activity>
         <activity android:name=".module.qunaer.QunaerDetailActivity">
         </activity>
+        <activity android:name=".module.common.WebActivity">
+        </activity>
     </application>
 
 </manifest>

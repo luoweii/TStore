@@ -1,5 +1,7 @@
 package com.luowei.tstore.entity;
 
+import java.util.List;
+
 /**
  * 去那儿景点列表
  * Created by luowei on 2015/8/12.
@@ -45,7 +47,7 @@ public class QunaerDetailMsg extends BaseMsg {
         public String coordinates;
         public String imageUrl;
         public String comments;
-        public PriceList priceList;
+        public List<PriceList> priceList;
     }
 
     public class PriceList {

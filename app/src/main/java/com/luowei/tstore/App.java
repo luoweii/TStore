@@ -9,6 +9,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,7 +53,7 @@ public class App extends Application {
         DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true)
                 .cacheOnDisk(true)
                 .considerExifParams(true)
-                // .displayer(new FadeInBitmapDisplayer(300))
+                .displayer(new FadeInBitmapDisplayer(300))
                 .bitmapConfig(Bitmap.Config.RGB_565).imageScaleType(ImageScaleType.EXACTLY)
                 .build();
 
