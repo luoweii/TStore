@@ -54,12 +54,13 @@ public class App extends Application {
                 .cacheOnDisk(true)
                 .considerExifParams(true)
                 .displayer(new FadeInBitmapDisplayer(300))
+                .resetViewBeforeLoading(true)
                 .bitmapConfig(Bitmap.Config.RGB_565).imageScaleType(ImageScaleType.EXACTLY)
                 .build();
 
         ImageLoaderConfiguration imageconfig = new ImageLoaderConfiguration
                 .Builder(getApplicationContext())
-                .threadPoolSize(2)
+                .threadPoolSize(3)
                 .memoryCacheExtraOptions(720, 1280)  // 缓存到内存的图片大小范围
                 .diskCacheSize(50 * 1024 * 1024)  // 50Mb
                 .threadPriority(Thread.NORM_PRIORITY - 2)

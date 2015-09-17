@@ -34,6 +34,7 @@ public class WebActivity extends BaseActivity {
         String url = getIntent().getStringExtra("url");
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
+        settings.setAppCacheEnabled(true);
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

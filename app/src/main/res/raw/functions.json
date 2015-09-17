@@ -60,9 +60,9 @@
         "intent":"tstore.intent.action.BAIDU_QUNAER_TICKET"
     },
     {
-        "name":"百度糯米",
-        "imgId":"icon_nuomi",
-        "server":"http://apis.baidu.com/baidunuomi/openapi/shopdeals",
-        "intent":"tstore.intent.action.BAIDU_QUNAER_NUOMI"
+        "name":"美女图片",
+        "imgId":"icon_belle_image",
+        "server":"http://apis.baidu.com/txapi/mvtp/meinv",
+        "intent":"tstore.intent.action.BAIDU_BELLE_IMAGE"
     }
 ]

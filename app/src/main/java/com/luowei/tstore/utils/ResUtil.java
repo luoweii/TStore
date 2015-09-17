@@ -2,7 +2,6 @@ package com.luowei.tstore.utils;
 
 import android.content.Context;
 
-import com.lidroid.xutils.util.LogUtils;
 import com.luowei.tstore.R;
 
 import java.lang.reflect.Field;
@@ -14,7 +13,6 @@ import java.lang.reflect.Field;
 public class ResUtil {
     public static int getId(Context context, String typeName, String name) {
         try {
-            LogUtils.d("------------"+ R.class.getName());
             Class type = Class.forName(context.getPackageName() + ".R$" + typeName);
             Field idField = type.getField(name);
             return idField.getInt(name);

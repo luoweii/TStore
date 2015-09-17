@@ -82,6 +82,12 @@
         </activity>
         <activity android:name=".module.common.WebActivity">
         </activity>
+        <activity android:name=".module.belle.BelleActivity">
+            <intent-filter>
+                <action android:name="tstore.intent.action.BAIDU_BELLE_IMAGE"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
