@@ -22,6 +22,7 @@ import com.luowei.tstore.config.Constant;
 import com.luowei.tstore.entity.Belle;
 import com.luowei.tstore.entity.Function;
 import com.luowei.tstore.module.BaseActivity;
+import com.luowei.tstore.module.common.PhotoViewActivity;
 import com.luowei.tstore.module.common.WebActivity;
 import com.luowei.tstore.service.BelleService;
 import com.luowei.tstore.utils.CommonUtil;
@@ -52,6 +53,7 @@ public class BelleActivity extends BaseActivity {
     @ViewInject(R.id.gridView)
     private StaggeredGridView gridView;
     private List<Belle> data = new ArrayList<>();
+    private ArrayList<String> iamges = new ArrayList<>();
     private int page = 0;
     private BaseAdapter adapter = new BaseAdapter() {
         @Override
@@ -70,7 +72,7 @@ public class BelleActivity extends BaseActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
                 convertView = getLayoutInflater().inflate(R.layout.grid_item_belle,null);
             }
@@ -89,7 +91,7 @@ public class BelleActivity extends BaseActivity {
 
                 @Override
                 public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                    ivImage.setHeightRatio(loadedImage.getHeight()/loadedImage.getWidth());
+                    ivImage.setHeightRatio(loadedImage.getHeight() / loadedImage.getWidth());
                 }
 
                 @Override
@@ -99,6 +101,12 @@ public class BelleActivity extends BaseActivity {
             });
             TextView tvTitle = ViewHelper.get(convertView, R.id.tvTitle);
             tvTitle.setText(b.title);
+            ivImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PhotoViewActivity.startActivity(BelleActivity.this,position,iamges);
+                }
+            });
             return convertView;
         }
     };
@@ -153,6 +161,7 @@ public class BelleActivity extends BaseActivity {
                     while (jo.has(i+"")) {
                         Belle b = JSONUtil.fromJson(jo.getString(i + ""), Belle.class);
                         data.add(0,b);
+                        iamges.add(0,b.picUrl);
                         i++;
                     }
                     adapter.notifyDataSetChanged();

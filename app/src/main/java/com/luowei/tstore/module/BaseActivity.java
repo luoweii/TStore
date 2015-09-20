@@ -25,6 +25,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		eventBus = EventBus.getDefault();
+		eventBus.register(this);
 	}
 	
 	@Override
@@ -38,7 +39,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-        eventBus.register(this);
 	}
 
 	@Override
@@ -56,13 +56,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if (eventBus.isRegistered(this))
-            eventBus.unregister(this);
     }
 
     @Override
 	protected void onDestroy() {
 		super.onDestroy();
+		if (eventBus.isRegistered(this))
+			eventBus.unregister(this);
 		LogUtils.i("--销毁界面-->> " + getActivityName());
 	}
 

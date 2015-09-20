@@ -10,12 +10,14 @@
 
         <com.etsy.android.grid.util.DynamicHeightImageView
             android:id="@+id/ivImage"
+            android:minHeight="150dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/tvTitle"
+            android:padding="6dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
