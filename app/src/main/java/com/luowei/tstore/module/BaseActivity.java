@@ -8,6 +8,7 @@ import android.view.Window;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.util.LogUtils;
+import com.luowei.tstore.utils.CommonUtil;
 
 import java.lang.reflect.Method;
 
@@ -90,6 +91,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 		return super.onMenuOpened(featureId, menu);
 	}
 
-    public void onEvent(Object obj){
+    public void onEvent(String msg){
+		CommonUtil.showToast(msg);
     }
 }

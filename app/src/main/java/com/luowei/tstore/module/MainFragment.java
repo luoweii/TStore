@@ -84,4 +84,5 @@ public class MainFragment extends BaseFragment  {
     protected int getLayout() {
         return R.layout.fragment_main;
     }
+
 }

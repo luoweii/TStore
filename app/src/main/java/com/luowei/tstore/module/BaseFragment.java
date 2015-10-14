@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.lidroid.xutils.ViewUtils;
 import com.luowei.tstore.R;
+import com.luowei.tstore.utils.CommonUtil;
 import com.luowei.tstore.utils.ViewHelper;
 
 import de.greenrobot.event.EventBus;
@@ -29,6 +30,7 @@ public abstract class BaseFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         eventBus = EventBus.getDefault();
+        eventBus.register(this);
     }
 
     @Override
@@ -61,7 +63,6 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        eventBus.register(this);
     }
 
     @Override
@@ -77,12 +78,17 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
         if (eventBus.isRegistered(this))
             eventBus.unregister(this);
     }
 
-    public void onEvent(Object obj) {
-
+    public void onEvent(String msg) {
+        CommonUtil.showToast(msg);
     }
 
     @IdRes
